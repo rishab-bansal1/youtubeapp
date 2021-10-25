@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        #videos{
+            display: grid;
+            grid-template-columns: repeat(4,20%);
+            grid-gap: 5%;
+        }
+        #searchbox{
+          width:50%;
+          margin:auto;
+        }
+        #searchbox input,button{
+          width:71%;
+          border:2px solid white;
+          border-right:0px;
+          font-size:18px;
+          padding:12px;
+          background: transparent;
+          color:black;
+          
+        }
+        #searchbox button{
+          width:25%;
+          background: #eeeeee;
+          color:black;
+          float:right;
+          border-left:0px;
+        }
+        #searchbox button:hover{
+          opacity: .8;
+
+        }
+
+    </style>
+  </head>
+  <body>
+
+  <div id="searchbox">
+    <input type="text" id="query" placeholder="Search for a Video" />
+
+    <button onclick="searchVideos()">Search</button>
+  </div>
+    <div id="videos"></div>
+  </body>
+</html>
+
+<script>
+// AIzaSyCH8Ftr0XqgFTO0awAzD4qnu7CxtIuacC4
+//  https://youtube.googleapis.com/youtube/v3/search?maxResults=20&q=csk&type=video&key=[YOUR_API_KEY
+
+ async function searchVideos() {
+     let query = document.getElementById("query").value;
+     let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?maxResults=20&q=${query}&type=video&key=AIzaSyCH8Ftr0XqgFTO0awAzD4qnu7CxtIuacC4`);
+
+     let data = await res.json();
+
+    console.log("data:",data);
+
+    appendVideos(data.items);
+}
+
+//  searchVideos();
+
+ 
+function appendVideos(video_data){
+    videos.innerHTML = null;
+
+    video_data.forEach(({ id: { videoId } }) => {
+        // console.log("video:" ,id );
+
+        let div = document.createElement("div");
+
+        div.innerHTML =`<iframe width="260" height="215" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+
+        div.style.marginTop = "20px";
+        videos.append(div);
+    });
+}
+
+</script>

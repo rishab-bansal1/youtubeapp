@@ -1,5 +1,5 @@
 # youtube-clone
-YouTube clone with HTML and CSS and using api you can search videos and play them inside the webpage just like youtube but probablly with less ads :)
+YouTube clone with HTML and CSS and using api you can search videos and play them inside the webpage just like youtube but probably with less ads :)
 
 ### Description
 * Built this project to test my knowledge on embedding images and videos in a webpage. 
